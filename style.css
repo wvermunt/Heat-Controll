@@ -16,9 +16,6 @@ body {
     background-size: contain;
 }
 
-#dome_wrapper {
-}
-
 .header {
     background-color: #333;
     height: 40px;
@@ -35,7 +32,7 @@ body {
     border-radius: 0 0 20px 20px;
     font-size: 50px;
     text-align: center;
-    line-height: 200px;
+    line-height: 150px;
     margin-bottom: 30px;
 }
 
