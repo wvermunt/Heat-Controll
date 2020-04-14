@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Xampp" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" singleton="false" server_name="Xampp" start_url="/Heat-Controll">
+    <method v="2" />
+  </configuration>
+</component>

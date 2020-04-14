@@ -1,0 +1,50 @@
+body {
+    background: #1f4037; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #99f2c8, #1f4037); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #99f2c8, #1f4037); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#main_div {
+    /*background-color: rgba(255, 255, 255, 0.8);*/
+    width: 80%;
+    height: 1000px;
+    margin: 30px auto;
+}
+
+.main_div_bg {
+    background: url(images/bg.png) no-repeat center;
+    background-size: contain;
+}
+
+#dome_wrapper {
+}
+
+.header {
+    background-color: #333;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 20px 20px 0 0;
+    color: white;
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.containter {
+    background-color: white;
+    border-radius: 0 0 20px 20px;
+    font-size: 50px;
+    text-align: center;
+    line-height: 200px;
+    margin-bottom: 30px;
+}
+
+.dometemp_high {
+    background-color: red;
+    color: white;
+}
+
+.dometemp_low {
+    background-color: blue;
+    color: white;
+}
