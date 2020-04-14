@@ -16,6 +16,12 @@ body {
     background-size: contain;
 }
 
+#logo {
+    background: url(images/logo.png) no-repeat center;
+    background-size: contain;
+    width: 200px;
+}
+
 .header {
     background-color: #333;
     height: 40px;
@@ -25,10 +31,11 @@ body {
     font-size: 26px;
     font-weight: bold;
     text-align: center;
+    text-transform: uppercase;
 }
 
-.containter {
-    background-color: white;
+.container_style {
+    background-color: white !important;
     border-radius: 0 0 20px 20px;
     font-size: 50px;
     text-align: center;

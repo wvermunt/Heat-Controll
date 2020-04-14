@@ -38,18 +38,24 @@
                     $("#dometemp").addClass("dometemp_low");
                 if (dometemp > domehigh)
                     $("#dometemp").addClass("dometemp_high");
+                // $("#nestvideo1").hide();
+                // $("#nestvideo2").hide();
             });
     </script>
 </head>
 <body>
 <div id="main_div">
-    <div id="logo"></div>
+    <!-- <div id="logo" class="container"></div> -->
     <div class="header">Huidige temperatuur</div>
-    <div id="dometemp" class="containter">102.8</div>
+    <div id="dometemp" class="containter container_style">102.8</div>
     <div class="header">Minimum temperatuur</div>
-    <div id="dometemp_low" class="containter">95</div>
+    <div id="dometemp_low" class="containter container_style">95</div>
     <div class="header">Maximum temperatuur</div>
-    <div id="dometemp_high" class="containter">115</div>
+    <div id="dometemp_high" class="containter container_style">115</div>
+    <div id="nestvideo1" class="header">Live video stream</div>
+    <div id="nestvideo2" class="container container_style">
+    <iframe type="text/html" style="background-color: white; padding-top: 30px;" frameborder="0" width="480" height="300" src="//video.nest.com/embedded/live/KpSA9Hnhdl?autoplay=1" allowfullscreen></iframe>
+    </div>
 
 </body>
 </html>
