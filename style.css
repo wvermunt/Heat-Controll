@@ -63,13 +63,18 @@ body {
     display: inline-block;
 }
 
-button.btn.btn-primary {
+.btn_tmp {
     width: 80px;
-    font-size: 40px;
+    font-size: 40px !important;
     height: 80px;
 }
 
-#dometemp_val, #dometemp_low_val, #dometemp_high_val {
+#dometemp_low_val, #dometemp_high_val {
     display: inline-block;
     width: 100px;
+}
+
+#dometemp_val {
+    display: inline-block;
+    width: 200px;
 }
