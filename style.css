@@ -71,5 +71,5 @@ button.btn.btn-primary {
 
 #dometemp_val, #dometemp_low_val, #dometemp_high_val {
     display: inline-block;
-    width: 200px;
+    width: 150px;
 }
