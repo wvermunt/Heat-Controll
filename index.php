@@ -89,6 +89,15 @@ $dometemp_high = $temperatures[1]->Value;
                         count_obj.html(count);
                         domeTempHigh = count;
                     });
+
+                function update() {
+                    $.get("response.php", function(data) {
+                        $("#dometemp_val").html(data);
+                        window.setTimeout(update, 5000);
+                    });
+                }
+
+                update();
             });
     </script>
 </head>
@@ -97,7 +106,7 @@ $dometemp_high = $temperatures[1]->Value;
     <!-- <div id="logo" class="container"></div> -->
     <div class="header">Huidige temperatuur</div>
     <div id="dometemp" class="containter container_style ">
-        <div id="dometemp_val"><?=$dometemp?></div>
+        <div id="dometemp_val"></div>
     </div>
     <div class="header">Minimum temperatuur</div>
     <div id="dometemp_low" class="containter container_style">
