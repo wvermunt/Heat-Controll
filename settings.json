@@ -1,10 +1,10 @@
 [
     {
         "Name": "tempLow",
-        "Value": 95
+        "Value": 15
     },
     {
         "Name": "tempHigh",
-        "Value": 115
+        "Value": 25
     }
 ]

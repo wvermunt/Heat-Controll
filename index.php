@@ -26,7 +26,7 @@ $dometemp_high = $temperatures[1]->Value;
 
         // Load the document
         $(document).ready(
-            function () {
+            function update() {
                 $("#loading");
                 $.ajax({
                     type: 'GET',
@@ -35,11 +35,11 @@ $dometemp_high = $temperatures[1]->Value;
                     success: function(data) {
                         $("#dometemp_val").html(data);
                         $("#loading").html('');
-                        window.setTimeout(update, 10000);
+                        window.setTimeout(update, 5000);
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         $("#dometemp_err").html('Probleem met uitlezen temperatuur sensor..');
-                        window.setTimeout(update, 60000);
+                        window.setTimeout(update, 10000);
                     }
                 });
 
@@ -104,15 +104,6 @@ $dometemp_high = $temperatures[1]->Value;
                         count_obj.html(count);
                         domeTempHigh = count;
                     });
-
-                function update() {
-                    $.get("response.php", function(data) {
-                        $("#dometemp_val").html(data);
-                        window.setTimeout(update, 5000);
-                    });
-                }
-
-                update();
             });
     </script>
 </head>
