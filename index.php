@@ -20,14 +20,29 @@ $dometemp_high = $temperatures[1]->Value;
     <script src="js/jquery-3.5.0.min.js"></script>
     <script>
         // get the variables from PHP first
+        domeTemp = '';
         domeTempLow = "<?php echo $dometemp_low; ?>";
         domeTempHigh = "<?php echo $dometemp_high; ?>";
-
-        domeTemp = 102.3;
 
         // Load the document
         $(document).ready(
             function () {
+                $("#loading");
+                $.ajax({
+                    type: 'GET',
+                    url: 'response.php',
+                    timeout: 2000,
+                    success: function(data) {
+                        $("#dometemp_val").html(data);
+                        $("#loading").html('');
+                        window.setTimeout(update, 10000);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        $("#dometemp_err").html('Probleem met uitlezen temperatuur sensor..');
+                        window.setTimeout(update, 60000);
+                    }
+                });
+
                 if (domeTemp < domeTempLow)
                     $("#dometemp").addClass("dometemp_low");
                 if (domeTemp > domeTempHigh)
@@ -106,6 +121,9 @@ $dometemp_high = $temperatures[1]->Value;
     <!-- <div id="logo" class="container"></div> -->
     <div class="header">Huidige temperatuur</div>
     <div id="dometemp" class="containter container_style ">
+        <div id="loading">
+            <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        </div>
         <div id="dometemp_val"></div>
     </div>
     <div class="header">Minimum temperatuur</div>
