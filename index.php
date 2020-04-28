@@ -1,11 +1,6 @@
 <?php
 
-$url = 'settings.json'; // path to your JSON file
-$data = file_get_contents($url); // put the contents of the file into a variable
-$temperatures = json_decode($data); // decode the JSON feed
-
-$dometemp_low = $temperatures[0]->Value;
-$dometemp_high = $temperatures[1]->Value;
+require_once "functions.php";
 
 ?>
 
@@ -19,22 +14,20 @@ $dometemp_high = $temperatures[1]->Value;
     <title>Green Egg Temperature Controller</title>
     <script src="js/jquery-3.5.0.min.js"></script>
     <script>
-        // get the variables from PHP first
-        domeTemp = '';
-        domeTempLow = "<?php echo $dometemp_low; ?>";
-        domeTempHigh = "<?php echo $dometemp_high; ?>";
+
+        var domeTempLow = "<?php print $TempLow?>";
+        var domeTempHigh = "<?php print $TempHigh?>";
 
         // Load the document
         $(document).ready(
-            function update() {
-                $("#loading");
+            // Let's get the temperature from the probe and refresh the data every 10 seconds
+            function update(domeTemp) {
                 $.ajax({
                     type: 'GET',
-                    url: 'response.php',
+                    url: 'get_temperature.php',
                     timeout: 2000,
                     success: function(data) {
                         $("#dometemp_val").html(data);
-                        $("#loading").html('');
                         window.setTimeout(update, 5000);
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -43,6 +36,7 @@ $dometemp_high = $temperatures[1]->Value;
                     }
                 });
 
+                console.log(domeTemp);
                 if (domeTemp < domeTempLow)
                     $("#dometemp").addClass("dometemp_low");
                 if (domeTemp > domeTempHigh)
@@ -67,6 +61,44 @@ $dometemp_high = $temperatures[1]->Value;
                         count = count + 5;
                         count_obj.html(count);
                         domeTempLow = count;
+                    });
+
+                $("#save_tmp_low").click(
+                    function () {
+                        // Show some elements when the temp is too hot or too cold.
+                        // var data = {
+                        //     "Name": "Wim",
+                        //     "Value": "Yo"
+                        // }
+                        //
+                        // // step 2: convert data structure to JSON
+                        // $.ajax({
+                        //     type : "POST",
+                        //     url : "save_json.php",
+                        //     data : {
+                        //         json : JSON.stringify(data)
+                        //     }
+                        // });
+                        // $.post("save_json.php", {json : JSON.stringify(data)});
+                    });
+
+                $("#save_tmp_high").click(
+                    function () {
+                        // Show some elements when the temp is too hot or too cold.
+                        // var data = {
+                        //     "Name": "Frans",
+                        //     "Value": "Yodelahitie"
+                        // }
+                        //
+                        // // step 2: convert data structure to JSON
+                        // $.ajax({
+                        //     type : "POST",
+                        //     url : "save_json.php",
+                        //     data : {
+                        //         json : JSON.stringify(data)
+                        //     }
+                        // });
+                        // $.post("save_json.php", {json : JSON.stringify(data)});
                     });
 
                 $("#temp_decrease_low").click(
@@ -104,23 +136,36 @@ $dometemp_high = $temperatures[1]->Value;
                         count_obj.html(count);
                         domeTempHigh = count;
                     });
+                $("#slide_open").click(
+                    function () {
+                        $.get("stepper.php?slide_open");
+                    });
+                $("#slide_close").click(
+                    function () {
+                        $.get("stepper.php?slide_open");
+                    });
             });
     </script>
 </head>
 <body>
 <div id="main_div">
-    <!-- <div id="logo" class="container"></div> -->
-    <div class="header">Huidige temperatuur</div>
-    <div id="dometemp" class="containter container_style ">
-        <div id="loading">
-            <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-        </div>
+    <div id="navbar">
+        <div id="login">Login</div>
+    </div>
+    <div id="temp_val"></div>
+    <div class="header" id="top_container">Huidige temperatuur</div>
+    <div id="dometemp" class="containter container_style">
         <div id="dometemp_val"></div>
+    </div>
+    <div class="header">Luchttoevoer onder</div>
+    <div class="containter container_style">
+        <button type="button" id="slide_close" class="btn btn-primary btn_slide">Dicht</button>
+        <button type="button" id="slide_open" class="btn btn-primary btn_slide">Open</button>
     </div>
     <div class="header">Minimum temperatuur</div>
     <div id="dometemp_low" class="containter container_style">
         <button type="button" id="temp_decrease_low" class="btn btn-primary btn_tmp">-</button>
-        <div id="dometemp_low_val">10</div>
+        <div id="dometemp_low_val"></div>
         <button type="button" id="temp_increase_low" class="btn btn-primary btn_tmp">+</button>
         <div id="save_btn_low">
             <button type="button" id="save_tmp_low" class="btn btn-success">Opslaan</button>
@@ -129,10 +174,15 @@ $dometemp_high = $temperatures[1]->Value;
     <div class="header">Maximum temperatuur</div>
     <div id="dometemp_high" class="containter container_style">
         <button type="button" id="temp_decrease_high" class="btn btn-primary btn_tmp">-</button>
-        <div id="dometemp_high_val">10</div>
+        <div id="dometemp_high_val"></div>
         <button type="button" id="temp_increase_high" class="btn btn-primary btn_tmp">+</button>
         <div id="save_btn_high">
             <button type="button" id="save_tmp_high" class="btn btn-success">Opslaan</button>
+        </div>
+    </div>
+    <div id="password_panel" style="display: none">
+        <div id="password_panel_content">
+
         </div>
     </div>
     <!--    <div id="nestvideo1" class="header">Live video stream</div>-->

@@ -1,6 +1,12 @@
 <?php
-$myFile = "general.json";
-$fh = fopen($myFile, 'w') or die("can't open file");
-$stringData = $_GET["data"];
-fwrite($fh, $stringData);
-fclose($fh);
+$json = $_POST['json'];
+
+/* sanity check */
+if (json_decode($json) != null) {
+    $file = fopen('settings.json','w+');
+    fwrite($file, $json);
+    fclose($file);
+}
+else {
+    // user has posted invalid JSON, handle the error
+}
