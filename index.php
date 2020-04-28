@@ -146,11 +146,9 @@ require_once "functions.php";
                     });
                 $("#update").click(
                     function () {
-                        $.get("functions.php?update",function (res) {
-                            // Something
-                        }
+                        $.get("functions.php?update");
                         window.location.reload();
-                        });
+                    });
             });
     </script>
 </head>
