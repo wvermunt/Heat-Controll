@@ -100,8 +100,9 @@ body {
     margin-top: 80px;
 }
 
-#login {
+#login, #update {
     line-height: 50px;
-    text-align: right;
     margin-right: 20px;
+    display: inline-block;
+    float: right;
 }

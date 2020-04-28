@@ -41,3 +41,7 @@ function GetTemperature() {
         echo $act_temp;
     }
 }
+
+if (isset($_REQUEST['update'])) {
+    shell_exec('git pull');
+}

@@ -144,6 +144,13 @@ require_once "functions.php";
                     function () {
                         $.get("stepper.php?slide_open");
                     });
+                $("#update").click(
+                    function () {
+                        $.get("functions.php?update",function (res) {
+                            // Something
+                        }
+                        window.location.reload();
+                        });
             });
     </script>
 </head>
@@ -151,6 +158,7 @@ require_once "functions.php";
 <div id="main_div">
     <div id="navbar">
         <div id="login">Login</div>
+        <div id="update">Update</div>
     </div>
     <div id="temp_val"></div>
     <div class="header" id="top_container">Huidige temperatuur</div>
