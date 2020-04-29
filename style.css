@@ -58,13 +58,13 @@ body {
     color: black;
 }
 .dometemp_high {
-    background: url(images/temp_high.svg) 80px no-repeat #fff;
+    background: url(images/temp_high.svg) 40px no-repeat #fff;
     color: red;
 }
 
 .dometemp_low {
     background: url(images/temp_cold.svg) 80px no-repeat #fff;
-    color: blue;
+    color: #007bff;
 }
 
 .temperature {
@@ -100,9 +100,31 @@ body {
     margin-top: 80px;
 }
 
-#login, #update {
-    line-height: 50px;
-    margin-right: 20px;
+#login {
+    background: url(images/user.png) no-repeat;
+    background-size: cover;
     display: inline-block;
+    height: 20px;
+    width: 20px;
+    position: relative;
+    top: 16px;
     float: right;
+    margin: 0 30px 0 0;
+}
+
+#edit {
+    background: url(images/edit.png) no-repeat;
+    background-size: cover;
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    position: relative;
+    top: 16px;
+    float: right;
+    margin: 0 30px 0 0;
+}
+
+#slide_close, #slide_open {
+    margin-right: 20px;
+    margin-left: 20px;
 }

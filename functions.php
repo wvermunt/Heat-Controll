@@ -5,8 +5,8 @@ $url = 'settings.json'; // path to your JSON file
 $data = file_get_contents($url); // put the contents of the file into a variable
 $settings = json_decode($data); // decode the JSON feed
 
-$TempLow = $settings[0]->value;
-$TempHigh = $settings[1]->value;
+$TempLow = intval($settings[0]->value);
+$TempHigh = intval($settings[1]->value);
 
 //$settings = GetSettings();
 //
@@ -35,13 +35,9 @@ function IsWindows() {
 // Unused for now
 function GetTemperature() {
     if (IsWindows() == true){
-        echo 112.15;
+        echo 112;
     } else {
         $act_temp = shell_exec('python get_temperature.py');
         echo $act_temp;
     }
-}
-
-if (isset($_REQUEST['update'])) {
-    shell_exec('git pull');
 }

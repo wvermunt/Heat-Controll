@@ -16,7 +16,9 @@ require_once "functions.php";
     <script>
 
         var domeTempLow = "<?php print $TempLow?>";
+        // var domeTempLow = 25;
         var domeTempHigh = "<?php print $TempHigh?>";
+        // var domeTempHigh = 30;
 
         // Load the document
         $(document).ready(
@@ -25,10 +27,14 @@ require_once "functions.php";
                 $.ajax({
                     type: 'GET',
                     url: 'get_temperature.php',
-                    timeout: 2000,
+                    timeout: 1000,
                     success: function(data) {
                         $("#dometemp_val").html(data);
-                        window.setTimeout(update, 5000);
+                        if (data < domeTempLow)
+                            $("#dometemp").addClass("dometemp_low");
+                        if (data > domeTempHigh)
+                            $("#dometemp").addClass("dometemp_high");
+                        window.setTimeout(update, 3000);
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         $("#dometemp_err").html('Probleem met uitlezen temperatuur sensor..');
@@ -36,11 +42,6 @@ require_once "functions.php";
                     }
                 });
 
-                console.log(domeTemp);
-                if (domeTemp < domeTempLow)
-                    $("#dometemp").addClass("dometemp_low");
-                if (domeTemp > domeTempHigh)
-                    $("#dometemp").addClass("dometemp_high");
                 $("#nestvideo1").hide();
                 $("#nestvideo2").hide();
                 $("#save_btn_low").hide();
@@ -144,19 +145,14 @@ require_once "functions.php";
                     function () {
                         $.get("stepper.php?slide_open");
                     });
-                $("#update").click(
-                    function () {
-                        $.get("functions.php?update");
-                        window.location.reload();
-                    });
             });
     </script>
 </head>
 <body>
 <div id="main_div">
     <div id="navbar">
-        <div id="login">Login</div>
-        <div id="update">Update</div>
+        <div id="login"></div>
+        <div id="edit"></div>
     </div>
     <div id="temp_val"></div>
     <div class="header" id="top_container">Huidige temperatuur</div>
@@ -165,8 +161,8 @@ require_once "functions.php";
     </div>
     <div class="header">Luchttoevoer onder</div>
     <div class="containter container_style">
-        <button type="button" id="slide_close" class="btn btn-primary btn_slide">Dicht</button>
-        <button type="button" id="slide_open" class="btn btn-primary btn_slide">Open</button>
+        <button type="button" id="slide_close" class="btn btn-primary btn_tmp"><<</button>
+        <button type="button" id="slide_open" class="btn btn-primary btn_tmp">>></button>
     </div>
     <div class="header">Minimum temperatuur</div>
     <div id="dometemp_low" class="containter container_style">
